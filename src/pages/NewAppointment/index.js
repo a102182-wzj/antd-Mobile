@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import { Flex, WhiteSpace } from 'antd-mobile';
-import styles from './index.css';
-import router from 'umi/router';
+import { Button, WhiteSpace, WingBlank } from 'antd-mobile';
+import styles from './index.css'
 class NewAppointment extends Component{
   state={
 
   }
   render(){
     return(
-      <Fragment>
-      </Fragment>
+        <WingBlank>
+        <Button className={styles.buttonWZJ}>default</Button><WhiteSpace />
+        </WingBlank>
     )
   }
 }
