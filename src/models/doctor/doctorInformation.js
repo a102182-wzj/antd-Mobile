@@ -1,16 +1,30 @@
-
+import * as service from '../../service/service'
 export default {
-    namespace: 'globalSetting',
+    namespace: 'doctorInformation',
     state: {
-        title:'河马儿科'
+        doctors:[{
+            id:'',
+            name:'',
+            img:''
+        }]
+        
     },
   
     reducers: {
-     changeTitle(state,{pageTitle}){
-        let title2=state.title;
-        title2=pageTitle
-        return {...state,title:title2};
-     }
+        getDoctors(state,doctors1){
+          return state=doctors1
+        }
+    },
+    effects:{
+        *getDI({},{call,put}){
+            let promise;
+            promise= yield call(service.getDoctors,'get','/api/doctorInformation');
+            console.log(promise)
+            yield put({
+                type:'getDoctors',
+                doctors:promise.data
+            })
+           }
     },
     subscriptions: {
       redirect({ dispatch, history }) {

@@ -1,0 +1,15 @@
+.publicWZJ{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap: wrap
+}
+.publicDivWZJ{
+ width:80vw;
+ height:20vh;
+ border: 1px black solid;
+}
+.publicFlexWZJ{
+    width:100vw;
+    flex-wrap: wrap
+}
