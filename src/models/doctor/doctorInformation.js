@@ -13,7 +13,7 @@ export default {
     reducers: {
         getDoctors(state,doctors1){
           return state=doctors1
-        }
+        },
     },
     effects:{
         *getDI({},{call,put}){

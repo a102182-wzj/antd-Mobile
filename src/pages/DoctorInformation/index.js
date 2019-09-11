@@ -6,7 +6,9 @@ import styles from './index.css'
 import stylesPublic from '../../static/publicCss.css'
 import * as service from '../../service/service'
 const operation = Modal.operation;
-class InformationButton extends Component {
+const Item = List.Item;
+const Brief = Item.Brief;
+class DoctorInformation extends Component {
     state = {
         doctors: '',
         date: '',
@@ -14,13 +16,6 @@ class InformationButton extends Component {
         modal1: '',
         flexs: []
     }
-    toPatientInformation = () => {
-        router.push('/PatientInformation')
-    }
-    toDoctorInformation = () => {
-        router.push('/DoctorInformation')
-    }
-
     getDoctor = () => {
 
         service.getDoctors('get', '/api/doctorInformation').then(res => {
@@ -31,16 +26,21 @@ class InformationButton extends Component {
         })
     }
     closeModal = (count, time) => {
-        console.log(count);
-        console.log(time)
+        const { dispatch } = this.props
         this.setState({
             modal1: false
         })
+        const newTime = this.state.date + '  ' + time
+        dispatch({
+            type: 'doctorScheduling/setDate',
+            dateTime: newTime
+        })
+        router.push('/NewAppointment')
     }
     getDoctorScheduling = (doctor) => {
         this.props.dispatch({
             type: 'doctorScheduling/setDoctorInformation',
-            doctorInformation: doctor
+            doctor: doctor
         })
         service.getDoctors('get', '/api/doctorScheduling', { params: { id: doctor.id } }).then(res => {
 
@@ -62,13 +62,14 @@ class InformationButton extends Component {
             const doctors = this.state.doctors;
 
             test = doctors.map((item, index) => {
-                return <div key={index} onClick={() => this.getDoctorScheduling(item)} className={`${stylesPublic.publicWZJ} ${stylesPublic.publicDivWZJ}`}>
-                    <div className={stylesPublic.publicWZJ} style={imgDiv}> 这是头像</div>
-                    <div className={stylesPublic.publicWZJ} style={inputDiv}>
-                        <div type="text">{item.name}</div>
-                        <div type="text">{item.id}</div>
-                    </div>
-                </div>
+                return      <Item key={index}
+                arrow="horizontal"
+                thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
+                multipleLine
+                onClick={() => { this.getDoctorScheduling(item) }}
+            >{item.name}
+              
+            </Item>
             })
         }
         let fx = this.state.flexs.map((item, index) => {
@@ -93,8 +94,10 @@ class InformationButton extends Component {
                         <List.Item arrow="horizontal">选择时间</List.Item>
                     </DatePicker>
                 </List>
-                <div className={stylesPublic.publicWZJ}>
-                    {test}
+                <div >
+                <List renderHeader={() => '医生列表'} className="my-list">
+                        {test}
+                    </List>
                 </div>
                 <Modal
                     popup
@@ -107,12 +110,11 @@ class InformationButton extends Component {
                                 {fx}
                             </div>
                         </List>
-
-
                     </Flex>
                 </Modal>
             </Fragment>
         )
     }
 }
-export default connect()(InformationButton);
+
+export default connect()(DoctorInformation);
