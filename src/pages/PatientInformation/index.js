@@ -102,13 +102,13 @@ class Patientlnformation extends Component {
             bottom: '0px',
             width: '100vw',
             backgroundColor: '#108ee9',
-            zIndex: '99999'
+            zIndex: '2'
         }
         const over={
-            overflow:'hidden' 
+            zIndex: '9999'
         }
         return (
-            <div style={over}>
+            <div >
                 <SearchBar placeholder="手机号/预约姓名" onChange={this.onChange} />
                 <Button onClick={() => this.showModal('modal2')} style={addPatient}>新患者</Button>
                 <WhiteSpace />

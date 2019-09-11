@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import { Button, WhiteSpace, WingBlank,Flex } from 'antd-mobile';
+import { Button, WhiteSpace, WingBlank, Flex } from 'antd-mobile';
 import InButton from './InformationButton/index.js'
 import styles from './index.css'
-class NewAppointment extends Component{
-  state={
+class NewAppointment extends Component {
+  state = {
 
   }
-  render(){
-    return(
-        <WingBlank>
+  render() {
+    return (
+      <WingBlank>
         <Flex wrap='wrap'>
-      <InButton/>
+          <InButton />
         </Flex>
         <WhiteSpace />
-        </WingBlank>
+      </WingBlank>
     )
   }
 }

@@ -25,9 +25,16 @@ class InformationButton extends Component {
             PatienPhone:this.props.PatienPhone,
             PatienAge :this.props.PatienAge
         }
-        service.postPatient('','/api/postPatient',data).then(res=>{
-            Toast.success('Load success !!!', 1);
-        })
+        console.log(this.props.Date)
+        if(!!!this.props.Date){
+            Toast.fail('请完善医生信息', 1);
+        }else if(!!!this.props.PatienId){
+            Toast.fail('请完善患者信息', 1);
+        }else{
+            service.postPatient('','/api/postPatient',data).then(res=>{
+                Toast.success('预约成功', 1);
+            })
+        }
     }
     render() {
         let docotrJudge = (!!this.props.Date);
